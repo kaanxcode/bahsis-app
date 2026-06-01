@@ -3,113 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahşiş Kumbaram</title>
+    <title>Bahşiş Cüzdanım</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            background-color: #f4f7f6;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-color: #f1f5f9;
         }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Modern Kart Tasarımı */
         .card {
             border: none;
-            border-radius: 20px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            border-radius: 24px;
+            background: #ffffff;
+            box-shadow: 0 10px 25px rgba(148, 163, 184, 0.1);
+            margin-bottom: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        /* Gradient Toplam Kartı */
+        .card-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
+        }
+
         .btn-custom {
-            border-radius: 30px;
-            padding: 10px 20px;
-            font-weight: bold;
+            border-radius: 16px;
+            padding: 12px 24px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
-        .bg-soft-primary { background-color: #e0e7ff; color: #3730a3; }
-        .bg-soft-success { background-color: #d1fae5; color: #065f46; }
-        .bg-soft-danger { background-color: #fee2e2; color: #991b1b; }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
         
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 12px 16px;
+            font-weight: 500;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+            border-color: var(--primary);
+        }
+
+        /* Döviz Kutuları */
         .currency-box {
-            padding: 15px;
-            border-radius: 15px;
+            padding: 16px;
+            border-radius: 20px;
             text-align: center;
             flex: 1;
-            margin: 5px;
-            min-width: 80px;
+            margin: 6px;
+            min-width: 75px;
+            background: var(--secondary);
+            border: 1px solid #e2e8f0;
         }
-        .currency-row { display: flex; flex-wrap: wrap; justify-content: space-between; }
         
+        .currency-row { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: space-between; 
+            margin: -6px;
+        }
+
+        .currency-value {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        .currency-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Kur Giriş Alanları */
+        .rate-input-group {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .rate-input-group input {
+            background: transparent;
+            border: none;
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary);
+            padding: 0;
+        }
+        .rate-input-group input:focus { box-shadow: none; outline: none; }
+
         #app-section { display: none; }
         #auth-section { margin-top: 10vh; }
-        .list-group-item { border-radius: 15px !important; margin-bottom: 8px; border: none; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+        
+        /* Liste Tasarımı */
+        .list-group-item { 
+            border-radius: 16px !important; 
+            margin-bottom: 10px; 
+            border: 1px solid #f1f5f9; 
+            background: #fff; 
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 1.2rem;
+        }
+        .icon-income { background: #d1fae5; color: var(--success); }
+        .icon-expense { background: #fee2e2; color: var(--danger); }
+
+        .nav-pills .nav-link {
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 10px 20px;
+        }
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
     </style>
 </head>
 <body>
 
-<div class="container pb-5">
+<div class="container pb-5 pt-3">
     
     <div id="auth-section" class="row justify-content-center">
         <div class="col-md-6 col-lg-4">
-            <div class="card p-4 text-center">
-                <i class="fa-solid fa-piggy-bank fa-4x mb-3 text-warning"></i>
-                <h3 class="mb-4" style="color: #6366f1; font-weight: 800;">Bahşiş Kumbaram</h3>
+            <div class="card p-5 text-center">
+                <div class="mb-4">
+                    <i class="fa-solid fa-wallet fa-4x" style="color: var(--primary);"></i>
+                </div>
+                <h3 class="mb-2" style="font-weight: 800; color: var(--text-dark);">Bahşiş Cüzdanım</h3>
+                <p class="text-muted mb-4 small">Kazançlarını takip et, hedeflerine ulaş.</p>
                 <form id="auth-form">
                     <input type="email" id="email" class="form-control mb-3" placeholder="E-posta Adresi" required>
-                    <input type="password" id="password" class="form-control mb-3" placeholder="Şifre" required>
-                    <button type="submit" class="btn btn-primary btn-custom w-100 mb-2" id="login-btn">Giriş Yap</button>
-                    <button type="button" class="btn btn-outline-secondary btn-custom w-100" id="register-btn">Kayıt Ol</button>
+                    <input type="password" id="password" class="form-control mb-4" placeholder="Şifre" required>
+                    <button type="submit" class="btn btn-primary btn-custom w-100 mb-3" id="login-btn">Giriş Yap</button>
+                    <button type="button" class="btn btn-light btn-custom w-100" id="register-btn" style="color: var(--text-dark); border: 1px solid #e2e8f0;">Hesap Oluştur</button>
                 </form>
-                <div id="auth-error" class="text-danger mt-3 small"></div>
+                <div id="auth-error" class="text-danger mt-3 small fw-bold"></div>
             </div>
         </div>
     </div>
 
     <div id="app-section">
-        <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
-            <h4 style="color: #6366f1; font-weight: 800;"><i class="fa-solid fa-piggy-bank text-warning"></i> Kumbaram</h4>
-            <button id="logout-btn" class="btn btn-sm btn-outline-danger btn-custom"><i class="fa-solid fa-right-from-bracket"></i> Çıkış</button>
+        <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+            <h4 style="font-weight: 800; color: var(--text-dark); margin: 0;">
+                <i class="fa-solid fa-wallet" style="color: var(--primary);"></i> Cüzdanım
+            </h4>
+            <button id="logout-btn" class="btn btn-sm btn-light" style="border-radius: 10px; font-weight: 600; color: var(--danger);">
+                <i class="fa-solid fa-right-from-bracket"></i> Çıkış
+            </button>
         </div>
 
-        <div class="card p-3 mb-4">
-            <h6 class="text-muted text-center mb-3">Toplam Bakiyelerim</h6>
-            <div class="currency-row">
-                <div class="currency-box bg-soft-primary"><div class="h5 mb-0" id="total-tl">0</div><small>TL</small></div>
-                <div class="currency-box bg-soft-success"><div class="h5 mb-0" id="total-usd">0</div><small>USD</small></div>
-                <div class="currency-box bg-soft-primary"><div class="h5 mb-0" id="total-eur">0</div><small>EUR</small></div>
-                <div class="currency-box bg-soft-success"><div class="h5 mb-0" id="total-gbp">0</div><small>GBP</small></div>
+        <div class="card card-gradient p-4 mb-4 text-center">
+            <p class="mb-1 text-white-50 fw-semibold" style="letter-spacing: 1px; font-size: 0.85rem;">TOPLAM VARLIK (TL KARŞILIĞI)</p>
+            <h1 class="mb-0 fw-bold" style="font-size: 2.5rem;">
+                <span id="grand-total-tl">0.00</span> ₺
+            </h1>
+        </div>
+
+        <div class="card p-4 mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h6 class="mb-0 fw-bold" style="color: var(--text-dark);"><i class="fa-solid fa-arrow-right-arrow-left text-primary me-2"></i>Güncel Kurlar</h6>
+                <small class="text-muted" style="font-size: 0.75rem;">Anlık hesaplama için</small>
+            </div>
+            <div class="row g-2">
+                <div class="col-4">
+                    <div class="rate-input-group d-flex align-items-center justify-content-between">
+                        <span class="currency-label"><i class="fa-solid fa-dollar-sign text-success"></i> USD</span>
+                        <input type="number" id="rate-usd" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="rate-input-group d-flex align-items-center justify-content-between">
+                        <span class="currency-label"><i class="fa-solid fa-euro-sign text-primary"></i> EUR</span>
+                        <input type="number" id="rate-eur" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="rate-input-group d-flex align-items-center justify-content-between">
+                        <span class="currency-label"><i class="fa-solid fa-sterling-sign" style="color:#6366f1;"></i> GBP</span>
+                        <input type="number" id="rate-gbp" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="card p-3 mb-4">
-            <h6 class="text-muted mb-3"><i class="fa-solid fa-plus text-primary"></i> Yeni İşlem</h6>
-            <form id="transaction-form" class="row g-2">
-                <div class="col-6">
-                    <input type="number" id="amount" class="form-control" placeholder="Tutar" required step="0.01">
+        <div class="card p-4 mb-4">
+            <h6 class="fw-bold mb-3" style="color: var(--text-dark);">Bölünmüş Bakiyeler</h6>
+            <div class="currency-row">
+                <div class="currency-box">
+                    <div class="currency-value" id="total-tl">0</div>
+                    <div class="currency-label">TL (₺)</div>
                 </div>
-                <div class="col-6">
-                    <select id="currency" class="form-select">
+                <div class="currency-box">
+                    <div class="currency-value" id="total-usd">0</div>
+                    <div class="currency-label">USD ($)</div>
+                </div>
+                <div class="currency-box">
+                    <div class="currency-value" id="total-eur">0</div>
+                    <div class="currency-label">EUR (€)</div>
+                </div>
+                <div class="currency-box">
+                    <div class="currency-value" id="total-gbp">0</div>
+                    <div class="currency-label">GBP (£)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-4 mb-4">
+            <h6 class="fw-bold mb-3" style="color: var(--text-dark);"><i class="fa-solid fa-plus text-primary me-2"></i>Yeni İşlem Ekle</h6>
+            <form id="transaction-form" class="row g-3">
+                <div class="col-12 col-md-4">
+                    <input type="number" id="amount" class="form-control bg-light" placeholder="0.00" required step="0.01">
+                </div>
+                <div class="col-6 col-md-4">
+                    <select id="currency" class="form-select bg-light">
                         <option value="TL">TL (₺)</option>
                         <option value="USD">Dolar ($)</option>
                         <option value="EUR">Euro (€)</option>
                         <option value="GBP">Pound (£)</option>
                     </select>
                 </div>
-                <div class="col-6">
-                    <select id="type" class="form-select">
-                        <option value="income">Bahşiş Girdi</option>
-                        <option value="expense">Para Çıkışı</option>
+                <div class="col-6 col-md-4">
+                    <select id="type" class="form-select bg-light">
+                        <option value="income">Bahşiş Geldi (+)</option>
+                        <option value="expense">Para Çıktı (-)</option>
                     </select>
                 </div>
-                <div class="col-6">
-                    <button type="submit" class="btn btn-primary btn-custom w-100">Kaydet</button>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-custom w-100 shadow-sm">İşlemi Kaydet</button>
                 </div>
             </form>
         </div>
 
-        <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills nav-fill mb-4" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active rounded-pill" data-bs-toggle="pill" data-bs-target="#history">Geçmiş</button>
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#history">İşlem Geçmişi</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link rounded-pill" data-bs-toggle="pill" data-bs-target="#stats">İstatistikler</button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#stats">Aylık İstatistikler</button>
             </li>
         </ul>
 
@@ -119,12 +293,12 @@
                     </div>
             </div>
             <div class="tab-pane fade" id="stats">
-                <div class="card p-3 text-center">
-                    <p class="text-muted small mb-1">Bu Ayki Toplam Bahşiş (TL Bazlı Gösterim Yok, Dövizler Ayrıdır)</p>
-                    <div id="monthly-stats" class="mb-3 font-weight-bold text-primary"></div>
-                    <hr>
-                    <p class="text-muted small mb-1">Haftalık Toplam</p>
-                    <div id="weekly-stats" class="mb-3 font-weight-bold text-success"></div>
+                <div class="card p-4 text-center">
+                    <p class="text-muted small fw-bold mb-2 text-uppercase">Bu Ayki Sadece Bahşiş Girişleri</p>
+                    <div id="monthly-stats" class="mb-4 fw-bold text-primary" style="font-size: 1.1rem; line-height: 1.8;"></div>
+                    
+                    <p class="text-muted small fw-bold mb-2 text-uppercase">Haftalık Sadece Bahşiş Girişleri</p>
+                    <div id="weekly-stats" class="fw-bold text-success" style="font-size: 1.1rem; line-height: 1.8;"></div>
                 </div>
             </div>
         </div>
@@ -136,11 +310,10 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } 
         from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp } 
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } 
         from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
-    // BURAYA KENDİ FİREBASE CONFİG BİLGİLERİNİ YAPIŞTIR
-   const firebaseConfig = {
+    const firebaseConfig = {
       apiKey: "AIzaSyD7k7uZq9kPEzfTbJnsrGnhicY_VOclS2c",
       authDomain: "bahsis-app.firebaseapp.com",
       projectId: "bahsis-app",
@@ -153,14 +326,51 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // UI Elementleri
     const authSection = document.getElementById('auth-section');
     const appSection = document.getElementById('app-section');
     const authForm = document.getElementById('auth-form');
     const authError = document.getElementById('auth-error');
+    
     let currentUser = null;
+    let currentBalances = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
 
-    // Oturum Kalıcılığı (Firebase varsayılan olarak cihazda kalıcı oturum sağlar)
+    // --- KUR YÖNETİMİ BAŞLANGIÇ ---
+    // Kurları LocalStorage'dan al, yoksa varsayılan değerleri ata
+    const savedRates = JSON.parse(localStorage.getItem('tipRates')) || { USD: 32.50, EUR: 35.20, GBP: 41.10 };
+    
+    const rateUsdInput = document.getElementById('rate-usd');
+    const rateEurInput = document.getElementById('rate-eur');
+    const rateGbpInput = document.getElementById('rate-gbp');
+
+    rateUsdInput.value = savedRates.USD;
+    rateEurInput.value = savedRates.EUR;
+    rateGbpInput.value = savedRates.GBP;
+
+    function saveRatesAndCalculate() {
+        const rates = {
+            USD: parseFloat(rateUsdInput.value) || 0,
+            EUR: parseFloat(rateEurInput.value) || 0,
+            GBP: parseFloat(rateGbpInput.value) || 0
+        };
+        localStorage.setItem('tipRates', JSON.stringify(rates));
+        
+        // Toplam TL'yi Hesapla
+        const grandTotal = currentBalances.TL + 
+                          (currentBalances.USD * rates.USD) + 
+                          (currentBalances.EUR * rates.EUR) + 
+                          (currentBalances.GBP * rates.GBP);
+                          
+        // Ekrana formatlı yazdır (Örn: 1.250,50)
+        document.getElementById('grand-total-tl').innerText = grandTotal.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Inputlara değişiklik dinleyicisi ekle
+    [rateUsdInput, rateEurInput, rateGbpInput].forEach(input => {
+        input.addEventListener('input', saveRatesAndCalculate);
+    });
+    // --- KUR YÖNETİMİ BİTİŞ ---
+
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
@@ -174,7 +384,6 @@
         }
     });
 
-    // Kayıt
     document.getElementById('register-btn').addEventListener('click', async () => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
@@ -182,7 +391,6 @@
         catch (error) { authError.innerText = "Kayıt Hatası: Şifre en az 6 hane olmalı."; }
     });
 
-    // Giriş
     authForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
@@ -191,10 +399,8 @@
         catch (error) { authError.innerText = "Giriş başarısız. Bilgileri kontrol et."; }
     });
 
-    // Çıkış
     document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
 
-    // İşlem Ekleme
     document.getElementById('transaction-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const amount = parseFloat(document.getElementById('amount').value);
@@ -210,20 +416,20 @@
             timestamp: serverTimestamp(),
             date: new Date().toISOString()
         });
-        document.getElementById('transaction-form').reset();
+        
+        document.getElementById('amount').value = '';
     });
 
-    // Verileri Çekme ve Ekrana Yazdırma
     function loadData() {
         const q = query(collection(db, "users", currentUser.uid, "transactions"), orderBy("timestamp", "desc"));
         
         onSnapshot(q, (snapshot) => {
-            let totals = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
-            const listEl = document.getElementById('transaction-list');
-            listEl.innerHTML = '';
-
+            currentBalances = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
             let monthlyTotals = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
             let weeklyTotals = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
+            
+            const listEl = document.getElementById('transaction-list');
+            listEl.innerHTML = '';
             
             const now = new Date();
             const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -234,37 +440,55 @@
                 const data = doc.data();
                 if(!data.timestamp) return;
 
-                // Bakiyeleri Hesapla
                 const val = data.type === 'income' ? data.amount : -data.amount;
-                totals[data.currency] += val;
+                currentBalances[data.currency] += val;
 
-                // Aylık ve Haftalık Hesaplamalar (Sadece Girdi/Bahşişleri sayıyoruz)
                 const docDate = data.timestamp.toDate();
                 if(data.type === 'income') {
                     if(docDate >= firstDayOfMonth) monthlyTotals[data.currency] += data.amount;
                     if(docDate >= firstDayOfWeek) weeklyTotals[data.currency] += data.amount;
                 }
 
-                // Listeye Ekle
+                // Arayüz Liste Öğesi
                 const li = document.createElement('div');
-                li.className = 'list-group-item d-flex justify-content-between align-items-center';
-                const icon = data.type === 'income' ? '<i class="fa-solid fa-arrow-down text-success"></i>' : '<i class="fa-solid fa-arrow-up text-danger"></i>';
-                const dateStr = docDate.toLocaleDateString('tr-TR') + ' ' + docDate.toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
+                li.className = 'list-group-item';
+                
+                const isIncome = data.type === 'income';
+                const iconClass = isIncome ? 'fa-arrow-down' : 'fa-arrow-up';
+                const bgClass = isIncome ? 'icon-income' : 'icon-expense';
+                const amountSign = isIncome ? '+' : '-';
+                
+                const dateStr = docDate.toLocaleDateString('tr-TR', {day: 'numeric', month: 'short'}) + ' ' + docDate.toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
                 
                 li.innerHTML = `
-                    <div>${icon} <span class="fw-bold">${data.amount} ${data.currency}</span><br><small class="text-muted">${dateStr}</small></div>
+                    <div class="icon-circle ${bgClass}">
+                        <i class="fa-solid ${iconClass}"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold text-dark">${isIncome ? 'Bahşiş Geldi' : 'Para Çıkışı'}</div>
+                        <div class="small text-muted">${dateStr}</div>
+                    </div>
+                    <div class="fw-bold" style="font-size: 1.1rem; color: ${isIncome ? 'var(--success)' : 'var(--danger)'};">
+                        ${amountSign}${data.amount} ${data.currency}
+                    </div>
                 `;
                 listEl.appendChild(li);
             });
 
-            // Ekrana Yazdır
-            document.getElementById('total-tl').innerText = totals.TL.toFixed(2);
-            document.getElementById('total-usd').innerText = totals.USD.toFixed(2);
-            document.getElementById('total-eur').innerText = totals.EUR.toFixed(2);
-            document.getElementById('total-gbp').innerText = totals.GBP.toFixed(2);
+            // Alt Kutu Bakiyelerini Yazdır
+            document.getElementById('total-tl').innerText = currentBalances.TL.toFixed(2);
+            document.getElementById('total-usd').innerText = currentBalances.USD.toFixed(2);
+            document.getElementById('total-eur').innerText = currentBalances.EUR.toFixed(2);
+            document.getElementById('total-gbp').innerText = currentBalances.GBP.toFixed(2);
 
-            document.getElementById('monthly-stats').innerText = `TL: ${monthlyTotals.TL} | $: ${monthlyTotals.USD} | €: ${monthlyTotals.EUR} | £: ${monthlyTotals.GBP}`;
-            document.getElementById('weekly-stats').innerText = `TL: ${weeklyTotals.TL} | $: ${weeklyTotals.USD} | €: ${weeklyTotals.EUR} | £: ${weeklyTotals.GBP}`;
+            // İstatistikleri Yazdır
+            document.getElementById('monthly-stats').innerHTML = 
+                `₺ ${monthlyTotals.TL.toFixed(2)} &nbsp;|&nbsp; $ ${monthlyTotals.USD.toFixed(2)} <br> € ${monthlyTotals.EUR.toFixed(2)} &nbsp;|&nbsp; £ ${monthlyTotals.GBP.toFixed(2)}`;
+            document.getElementById('weekly-stats').innerHTML = 
+                `₺ ${weeklyTotals.TL.toFixed(2)} &nbsp;|&nbsp; $ ${weeklyTotals.USD.toFixed(2)} <br> € ${weeklyTotals.EUR.toFixed(2)} &nbsp;|&nbsp; £ ${weeklyTotals.GBP.toFixed(2)}`;
+
+            // Genel TL Toplamını Güncelle
+            saveRatesAndCalculate();
         });
     }
 </script>
