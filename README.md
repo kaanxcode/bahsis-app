@@ -50,12 +50,10 @@ Uygulama statik dosyalar (HTML, CSS, JS) barındırdığı için herhangi bir su
 
 Bu projenin temel mimarisi, tasarımı ve kodlaması tamamen yapay zeka (Google Gemini) kullanılarak, özel prompt mühendisliği (Prompt Engineering) teknikleriyle oluşturulmuştur. 
 
-Projeyi hayata geçiren temel "Prompt" aşağıda yer almaktadır:
 
-> *"Benim için bahyşilerimi birkritirebileceğim bir web app tasarla otelde çalışıyorum türk lirası pound dolar ve euro olarak bahşiş alıyorum günlük bahşilerimi girebileceğim para çıkışı yapabileceğim her işlem kayıt altına alınsın ve gözüksün total paramı göerebileğim aylık ve haftalık bahşiişimi göreyeim ortala günlüğk ne akdar kazandım göçrebileğim uygulama çok kullanıcılı olsun ve hesap oluşturulsun öğle gfi,rlisin javascrşipt html bootstrap kulllajnh github pagesta yayınlaycağpım host edeceğim nereden oturum açrsam açayım eski datam gelsin bunun için firebase kullan buna uygun bir sisitem tasraala giriş yaptıktan sonra o cihazda çıkış yap demeden çıkış yapmasın tüm uygulama mobil uyumlu responsive olsun senden modern göze hoş gelen biraz sevimli, bir tasarım ve yazılım bekliyorum bqana kodu yaz ve tüm yayınlama adımlarını anlatabir yazı ver"*
 
 ---
 
 <div align="center">
-  <sub>Modern web teknolojileri ile 🤍 tarafından geliştirilmiştir.</sub>
+  <sub>Mustafa Kaan Sevinç</sub>
 </div>
