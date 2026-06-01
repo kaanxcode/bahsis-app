@@ -33,22 +33,30 @@
             border-radius: 24px;
             background: #ffffff;
             box-shadow: 0 10px 25px rgba(148, 163, 184, 0.1);
-            margin-bottom: 24px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 20px;
         }
 
-        /* Gradient Toplam Kartı */
+        /* Responsive Gradient Toplam Kartı */
         .card-gradient {
             background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
             color: white;
             box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
         }
 
+        .grand-total-title {
+            letter-spacing: 1px; 
+            font-size: 0.8rem;
+        }
+
+        .grand-total-value {
+            font-size: calc(1.8rem + 1.2vw); /* Mobil cihazlarda taşmayı önleyen dinamik font */
+            font-weight: 800;
+        }
+
         .btn-custom {
             border-radius: 16px;
             padding: 12px 24px;
             font-weight: 600;
-            letter-spacing: 0.3px;
         }
 
         .btn-primary {
@@ -62,7 +70,7 @@
         }
 
         .form-control, .form-select {
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid #e2e8f0;
             padding: 12px 16px;
             font-weight: 500;
@@ -73,58 +81,92 @@
             border-color: var(--primary);
         }
 
+        /* Miktar Arttırma/Azaltma Buton Grubu */
+        .stepper-input-group {
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #f8fafc;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-step {
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            padding: 12px 18px;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+        .btn-step:hover {
+            background: #e2e8f0;
+        }
+        .btn-step:active {
+            background: #cbd5e1;
+        }
+
+        .stepper-input-group .form-control {
+            border: none !important;
+            background: transparent !important;
+            text-align: center;
+            padding: 12px 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .stepper-input-group .form-control:focus {
+            box-shadow: none;
+        }
+
         /* Döviz Kutuları */
         .currency-box {
-            padding: 16px;
-            border-radius: 20px;
+            padding: 14px 10px;
+            border-radius: 18px;
             text-align: center;
-            flex: 1;
-            margin: 6px;
-            min-width: 75px;
             background: var(--secondary);
             border: 1px solid #e2e8f0;
-        }
-        
-        .currency-row { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: space-between; 
-            margin: -6px;
+            height: 100%;
         }
 
         .currency-value {
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: var(--text-dark);
+            word-break: break-all;
         }
 
         .currency-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
+            margin-top: 2px;
         }
 
         /* Kur Giriş Alanları */
         .rate-input-group {
             background: #f8fafc;
-            border-radius: 16px;
-            padding: 12px;
+            border-radius: 14px;
+            padding: 10px 14px;
             border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .rate-input-group input {
             background: transparent;
             border: none;
             text-align: right;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary);
             padding: 0;
+            width: 60px;
         }
         .rate-input-group input:focus { box-shadow: none; outline: none; }
 
         #app-section { display: none; }
-        #auth-section { margin-top: 10vh; }
+        #auth-section { margin-top: 8vh; }
         
         /* Liste Tasarımı */
         .list-group-item { 
@@ -132,21 +174,22 @@
             margin-bottom: 10px; 
             border: 1px solid #f1f5f9; 
             background: #fff; 
-            padding: 16px;
+            padding: 14px;
             display: flex;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .icon-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 16px;
-            font-size: 1.2rem;
+            margin-right: 14px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
         }
         .icon-income { background: #d1fae5; color: var(--success); }
         .icon-expense { background: #fee2e2; color: var(--danger); }
@@ -155,7 +198,7 @@
             border-radius: 12px;
             color: var(--text-muted);
             font-weight: 600;
-            padding: 10px 20px;
+            padding: 10px 16px;
         }
         .nav-pills .nav-link.active {
             background-color: var(--primary);
@@ -165,11 +208,11 @@
 </head>
 <body>
 
-<div class="container pb-5 pt-3">
+<div class="container pb-5 pt-3" style="max-width: 540px;">
     
-    <div id="auth-section" class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <div class="card p-5 text-center">
+    <div id="auth-section" class="row justify-content-center px-2">
+        <div class="col-12">
+            <div class="card p-4 p-sm-5 text-center">
                 <div class="mb-4">
                     <i class="fa-solid fa-wallet fa-4x" style="color: var(--primary);"></i>
                 </div>
@@ -186,79 +229,91 @@
         </div>
     </div>
 
-    <div id="app-section">
-        <div class="d-flex justify-content-between align-items-center mb-4 px-2">
-            <h4 style="font-weight: 800; color: var(--text-dark); margin: 0;">
+    <div id="app-section" class="px-1">
+        <div class="d-flex justify-content-between align-items-center mb-4 px-1">
+            <h4 style="font-weight: 800; color: var(--text-dark); margin: 0; font-size: 1.3rem;">
                 <i class="fa-solid fa-wallet" style="color: var(--primary);"></i> Cüzdanım
             </h4>
-            <button id="logout-btn" class="btn btn-sm btn-light" style="border-radius: 10px; font-weight: 600; color: var(--danger);">
+            <button id="logout-btn" class="btn btn-sm btn-light shadow-sm" style="border-radius: 10px; font-weight: 600; color: var(--danger); padding: 6px 12px;">
                 <i class="fa-solid fa-right-from-bracket"></i> Çıkış
             </button>
         </div>
 
-        <div class="card card-gradient p-4 mb-4 text-center">
-            <p class="mb-1 text-white-50 fw-semibold" style="letter-spacing: 1px; font-size: 0.85rem;">TOPLAM VARLIK (TL KARŞILIĞI)</p>
-            <h1 class="mb-0 fw-bold" style="font-size: 2.5rem;">
+        <div class="card card-gradient p-4 mb-3 text-center">
+            <p class="mb-1 text-white-50 fw-semibold grand-total-title">TOPLAM VARLIK (TL KARŞILIĞI)</p>
+            <div class="grand-total-value">
                 <span id="grand-total-tl">0.00</span> ₺
-            </h1>
+            </div>
         </div>
 
-        <div class="card p-4 mb-4">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 fw-bold" style="color: var(--text-dark);"><i class="fa-solid fa-arrow-right-arrow-left text-primary me-2"></i>Güncel Kurlar</h6>
-                <small class="text-muted" style="font-size: 0.75rem;">Anlık hesaplama için</small>
+        <div class="card p-3 mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-3 px-1">
+                <h6 class="mb-0 fw-bold" style="font-size: 0.9rem; color: var(--text-dark);"><i class="fa-solid fa-arrow-right-arrow-left text-primary me-2"></i>Güncel Kurlar</h6>
+                <small class="text-muted" style="font-size: 0.7rem;">Değiştirebilirsiniz</small>
             </div>
             <div class="row g-2">
-                <div class="col-4">
-                    <div class="rate-input-group d-flex align-items-center justify-content-between">
-                        <span class="currency-label"><i class="fa-solid fa-dollar-sign text-success"></i> USD</span>
+                <div class="col-12 col-sm-4">
+                    <div class="rate-input-group">
+                        <span class="currency-label"><i class="fa-solid fa-dollar-sign text-success me-1"></i>USD</span>
                         <input type="number" id="rate-usd" step="0.01" placeholder="0.00">
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="rate-input-group d-flex align-items-center justify-content-between">
-                        <span class="currency-label"><i class="fa-solid fa-euro-sign text-primary"></i> EUR</span>
+                <div class="col-12 col-sm-4">
+                    <div class="rate-input-group">
+                        <span class="currency-label"><i class="fa-solid fa-euro-sign text-primary me-1"></i>EUR</span>
                         <input type="number" id="rate-eur" step="0.01" placeholder="0.00">
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="rate-input-group d-flex align-items-center justify-content-between">
-                        <span class="currency-label"><i class="fa-solid fa-sterling-sign" style="color:#6366f1;"></i> GBP</span>
+                <div class="col-12 col-sm-4">
+                    <div class="rate-input-group">
+                        <span class="currency-label"><i class="fa-solid fa-sterling-sign me-1" style="color:#6366f1;"></i>GBP</span>
                         <input type="number" id="rate-gbp" step="0.01" placeholder="0.00">
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card p-4 mb-4">
-            <h6 class="fw-bold mb-3" style="color: var(--text-dark);">Bölünmüş Bakiyeler</h6>
-            <div class="currency-row">
-                <div class="currency-box">
-                    <div class="currency-value" id="total-tl">0</div>
-                    <div class="currency-label">TL (₺)</div>
+        <div class="card p-3 mb-3">
+            <h6 class="fw-bold mb-3 px-1" style="font-size: 0.9rem; color: var(--text-dark);">Bölünmüş Bakiyeler</h6>
+            <div class="row row-cols-2 row-cols-sm-4 g-2">
+                <div class="col">
+                    <div class="currency-box">
+                        <div class="currency-value" id="total-tl">0</div>
+                        <div class="currency-label">TL (₺)</div>
+                    </div>
                 </div>
-                <div class="currency-box">
-                    <div class="currency-value" id="total-usd">0</div>
-                    <div class="currency-label">USD ($)</div>
+                <div class="col">
+                    <div class="currency-box">
+                        <div class="currency-value" id="total-usd">0</div>
+                        <div class="currency-label">USD ($)</div>
+                    </div>
                 </div>
-                <div class="currency-box">
-                    <div class="currency-value" id="total-eur">0</div>
-                    <div class="currency-label">EUR (€)</div>
+                <div class="col">
+                    <div class="currency-box">
+                        <div class="currency-value" id="total-eur">0</div>
+                        <div class="currency-label">EUR (€)</div>
+                    </div>
                 </div>
-                <div class="currency-box">
-                    <div class="currency-value" id="total-gbp">0</div>
-                    <div class="currency-label">GBP (£)</div>
+                <div class="col">
+                    <div class="currency-box">
+                        <div class="currency-value" id="total-gbp">0</div>
+                        <div class="currency-label">GBP (£)</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="card p-4 mb-4">
-            <h6 class="fw-bold mb-3" style="color: var(--text-dark);"><i class="fa-solid fa-plus text-primary me-2"></i>Yeni İşlem Ekle</h6>
-            <form id="transaction-form" class="row g-3">
-                <div class="col-12 col-md-4">
-                    <input type="number" id="amount" class="form-control bg-light" placeholder="0.00" required step="0.01">
+        <div class="card p-3 mb-4">
+            <h6 class="fw-bold mb-3 px-1" style="font-size: 0.9rem; color: var(--text-dark);"><i class="fa-solid fa-plus text-primary me-2"></i>Yeni İşlem Ekle</h6>
+            <form id="transaction-form" class="row g-2">
+                <div class="col-12">
+                    <div class="stepper-input-group">
+                        <button class="btn-step" type="button" id="btn-minus"><i class="fa-solid fa-minus text-muted"></i></button>
+                        <input type="number" id="amount" class="form-control" placeholder="0.00" required step="0.01" inputmode="decimal">
+                        <button class="btn-step" type="button" id="btn-plus"><i class="fa-solid fa-plus text-muted"></i></button>
+                    </div>
                 </div>
-                <div class="col-6 col-md-4">
+                <div class="col-6">
                     <select id="currency" class="form-select bg-light">
                         <option value="TL">TL (₺)</option>
                         <option value="USD">Dolar ($)</option>
@@ -266,19 +321,19 @@
                         <option value="GBP">Pound (£)</option>
                     </select>
                 </div>
-                <div class="col-6 col-md-4">
+                <div class="col-6">
                     <select id="type" class="form-select bg-light">
                         <option value="income">Bahşiş Geldi (+)</option>
                         <option value="expense">Para Çıktı (-)</option>
                     </select>
                 </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-custom w-100 shadow-sm">İşlemi Kaydet</button>
+                <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-primary btn-custom w-100 shadow-sm py-25">İşlemi Kaydet</button>
                 </div>
             </form>
         </div>
 
-        <ul class="nav nav-pills nav-fill mb-4" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#history">İşlem Geçmişi</button>
             </li>
@@ -294,11 +349,11 @@
             </div>
             <div class="tab-pane fade" id="stats">
                 <div class="card p-4 text-center">
-                    <p class="text-muted small fw-bold mb-2 text-uppercase">Bu Ayki Sadece Bahşiş Girişleri</p>
-                    <div id="monthly-stats" class="mb-4 fw-bold text-primary" style="font-size: 1.1rem; line-height: 1.8;"></div>
+                    <p class="text-muted small fw-bold mb-2 text-uppercase" style="letter-spacing: 0.5px;">Bu Ayki Sadece Bahşiş Girişleri</p>
+                    <div id="monthly-stats" class="mb-4 fw-bold text-primary" style="font-size: 1.05rem; line-height: 1.8;"></div>
                     
-                    <p class="text-muted small fw-bold mb-2 text-uppercase">Haftalık Sadece Bahşiş Girişleri</p>
-                    <div id="weekly-stats" class="fw-bold text-success" style="font-size: 1.1rem; line-height: 1.8;"></div>
+                    <p class="text-muted small fw-bold mb-2 text-uppercase" style="letter-spacing: 0.5px;">Haftalık Sadece Bahşiş Girişleri</p>
+                    <div id="weekly-stats" class="fw-bold text-success" style="font-size: 1.05rem; line-height: 1.8;"></div>
                 </div>
             </div>
         </div>
@@ -334,8 +389,22 @@
     let currentUser = null;
     let currentBalances = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
 
-    // --- KUR YÖNETİMİ BAŞLANGIÇ ---
-    // Kurları LocalStorage'dan al, yoksa varsayılan değerleri ata
+    // --- KÜÇÜK BUTONLAR (STEPPER) YÖNETİMİ ---
+    const amountInput = document.getElementById('amount');
+    
+    document.getElementById('btn-minus').addEventListener('click', () => {
+        let val = parseFloat(amountInput.value) || 0;
+        if (val > 0) {
+            amountInput.value = (val - 1 < 0 ? 0 : val - 1).toFixed(2);
+        }
+    });
+
+    document.getElementById('btn-plus').addEventListener('click', () => {
+        let val = parseFloat(amountInput.value) || 0;
+        amountInput.value = (val + 1).toFixed(2);
+    });
+
+    // --- KUR YÖNETİMİ ---
     const savedRates = JSON.parse(localStorage.getItem('tipRates')) || { USD: 32.50, EUR: 35.20, GBP: 41.10 };
     
     const rateUsdInput = document.getElementById('rate-usd');
@@ -354,23 +423,19 @@
         };
         localStorage.setItem('tipRates', JSON.stringify(rates));
         
-        // Toplam TL'yi Hesapla
         const grandTotal = currentBalances.TL + 
                           (currentBalances.USD * rates.USD) + 
                           (currentBalances.EUR * rates.EUR) + 
                           (currentBalances.GBP * rates.GBP);
                           
-        // Ekrana formatlı yazdır (Örn: 1.250,50)
         document.getElementById('grand-total-tl').innerText = grandTotal.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
-    // Inputlara değişiklik dinleyicisi ekle
     [rateUsdInput, rateEurInput, rateGbpInput].forEach(input => {
         input.addEventListener('input', saveRatesAndCalculate);
     });
-    // --- KUR YÖNETİMİ BİTİŞ ---
 
-
+    // --- AUTH VE VERİ AKIŞI ---
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
@@ -403,7 +468,7 @@
 
     document.getElementById('transaction-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const amount = parseFloat(document.getElementById('amount').value);
+        const amount = parseFloat(amountInput.value);
         const currency = document.getElementById('currency').value;
         const type = document.getElementById('type').value;
 
@@ -417,7 +482,7 @@
             date: new Date().toISOString()
         });
         
-        document.getElementById('amount').value = '';
+        amountInput.value = '';
     });
 
     function loadData() {
@@ -449,7 +514,6 @@
                     if(docDate >= firstDayOfWeek) weeklyTotals[data.currency] += data.amount;
                 }
 
-                // Arayüz Liste Öğesi
                 const li = document.createElement('div');
                 li.className = 'list-group-item';
                 
@@ -465,29 +529,26 @@
                         <i class="fa-solid ${iconClass}"></i>
                     </div>
                     <div class="flex-grow-1">
-                        <div class="fw-bold text-dark">${isIncome ? 'Bahşiş Geldi' : 'Para Çıkışı'}</div>
-                        <div class="small text-muted">${dateStr}</div>
+                        <div class="fw-bold text-dark" style="font-size:0.95rem;">${isIncome ? 'Bahşiş Geldi' : 'Para Çıkışı'}</div>
+                        <div class="small text-muted" style="font-size:0.75rem;">${dateStr}</div>
                     </div>
-                    <div class="fw-bold" style="font-size: 1.1rem; color: ${isIncome ? 'var(--success)' : 'var(--danger)'};">
+                    <div class="fw-bold" style="font-size: 1.05rem; color: ${isIncome ? 'var(--success)' : 'var(--danger)'};">
                         ${amountSign}${data.amount} ${data.currency}
                     </div>
                 `;
                 listEl.appendChild(li);
             });
 
-            // Alt Kutu Bakiyelerini Yazdır
             document.getElementById('total-tl').innerText = currentBalances.TL.toFixed(2);
             document.getElementById('total-usd').innerText = currentBalances.USD.toFixed(2);
             document.getElementById('total-eur').innerText = currentBalances.EUR.toFixed(2);
             document.getElementById('total-gbp').innerText = currentBalances.GBP.toFixed(2);
 
-            // İstatistikleri Yazdır
             document.getElementById('monthly-stats').innerHTML = 
                 `₺ ${monthlyTotals.TL.toFixed(2)} &nbsp;|&nbsp; $ ${monthlyTotals.USD.toFixed(2)} <br> € ${monthlyTotals.EUR.toFixed(2)} &nbsp;|&nbsp; £ ${monthlyTotals.GBP.toFixed(2)}`;
             document.getElementById('weekly-stats').innerHTML = 
                 `₺ ${weeklyTotals.TL.toFixed(2)} &nbsp;|&nbsp; $ ${weeklyTotals.USD.toFixed(2)} <br> € ${weeklyTotals.EUR.toFixed(2)} &nbsp;|&nbsp; £ ${weeklyTotals.GBP.toFixed(2)}`;
 
-            // Genel TL Toplamını Güncelle
             saveRatesAndCalculate();
         });
     }
