@@ -49,7 +49,7 @@
         }
 
         .grand-total-value {
-            font-size: calc(1.8rem + 1.2vw); /* Mobil cihazlarda taşmayı önleyen dinamik font */
+            font-size: calc(1.8rem + 1.2vw); 
             font-weight: 800;
         }
 
@@ -101,9 +101,6 @@
         }
         .btn-step:hover {
             background: #e2e8f0;
-        }
-        .btn-step:active {
-            background: #cbd5e1;
         }
 
         .stepper-input-group .form-control {
@@ -161,7 +158,7 @@
             font-weight: 700;
             color: var(--primary);
             padding: 0;
-            width: 60px;
+            width: 65px;
         }
         .rate-input-group input:focus { box-shadow: none; outline: none; }
 
@@ -247,33 +244,6 @@
         </div>
 
         <div class="card p-3 mb-3">
-            <div class="d-flex align-items-center justify-content-between mb-3 px-1">
-                <h6 class="mb-0 fw-bold" style="font-size: 0.9rem; color: var(--text-dark);"><i class="fa-solid fa-arrow-right-arrow-left text-primary me-2"></i>Güncel Kurlar</h6>
-                <small class="text-muted" style="font-size: 0.7rem;">Değiştirebilirsiniz</small>
-            </div>
-            <div class="row g-2">
-                <div class="col-12 col-sm-4">
-                    <div class="rate-input-group">
-                        <span class="currency-label"><i class="fa-solid fa-dollar-sign text-success me-1"></i>USD</span>
-                        <input type="number" id="rate-usd" step="0.01" placeholder="0.00">
-                    </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                    <div class="rate-input-group">
-                        <span class="currency-label"><i class="fa-solid fa-euro-sign text-primary me-1"></i>EUR</span>
-                        <input type="number" id="rate-eur" step="0.01" placeholder="0.00">
-                    </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                    <div class="rate-input-group">
-                        <span class="currency-label"><i class="fa-solid fa-sterling-sign me-1" style="color:#6366f1;"></i>GBP</span>
-                        <input type="number" id="rate-gbp" step="0.01" placeholder="0.00">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card p-3 mb-3">
             <h6 class="fw-bold mb-3 px-1" style="font-size: 0.9rem; color: var(--text-dark);">Bölünmüş Bakiyeler</h6>
             <div class="row row-cols-2 row-cols-sm-4 g-2">
                 <div class="col">
@@ -304,7 +274,7 @@
         </div>
 
         <div class="card p-3 mb-4">
-            <h6 class="fw-bold mb-3 px-1" style="font-size: 0.9rem; color: var(--text-dark);"><i class="fa-solid fa-plus text-primary me-2"></i>Yeni İşlem Ekle</h6>
+            <h6 class="fw-bold mb-3 px-1" style="font-size: 0.9rem; color: var(--text-dark);"><i class="fa-solid fa-plus text-primary me-2"></i>İşlem Girişi</h6>
             <form id="transaction-form" class="row g-2">
                 <div class="col-12">
                     <div class="stepper-input-group">
@@ -312,6 +282,9 @@
                         <input type="number" id="amount" class="form-control" placeholder="0.00" required step="0.01" inputmode="decimal">
                         <button class="btn-step" type="button" id="btn-plus"><i class="fa-solid fa-plus text-muted"></i></button>
                     </div>
+                </div>
+                <div class="col-12">
+                    <input type="date" id="transaction-date" class="form-control bg-light" required>
                 </div>
                 <div class="col-6">
                     <select id="currency" class="form-select bg-light">
@@ -342,7 +315,7 @@
             </li>
         </ul>
 
-        <div class="tab-content">
+        <div class="tab-content mb-4">
             <div class="tab-pane fade show active" id="history">
                 <div class="list-group" id="transaction-list">
                     </div>
@@ -357,6 +330,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="card p-3 shadow-sm" style="background: #f8fafc; border: 1px dashed #cbd5e1;">
+            <div class="d-flex align-items-center justify-content-between mb-3 px-1">
+                <h6 class="mb-0 fw-bold" style="font-size: 0.85rem; color: var(--text-dark);"><i class="fa-solid fa-arrow-right-arrow-left text-primary me-2"></i>Kur Ayarları</h6>
+                <small class="text-muted" style="font-size: 0.7rem;">Buradan düzenleyebilirsiniz</small>
+            </div>
+            <div class="row g-2">
+                <div class="col-4">
+                    <div class="rate-input-group">
+                        <span class="currency-label"><i class="fa-solid fa-dollar-sign text-success me-1"></i>USD</span>
+                        <input type="number" id="rate-usd" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="rate-input-group">
+                        <span class="currency-label"><i class="fa-solid fa-euro-sign text-primary me-1"></i>EUR</span>
+                        <input type="number" id="rate-eur" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="rate-input-group">
+                        <span class="currency-label"><i class="fa-solid fa-sterling-sign me-1" style="color:#6366f1;"></i>GBP</span>
+                        <input type="number" id="rate-gbp" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -365,7 +366,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } 
         from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } 
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } 
         from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -385,13 +386,18 @@
     const appSection = document.getElementById('app-section');
     const authForm = document.getElementById('auth-form');
     const authError = document.getElementById('auth-error');
+    const amountInput = document.getElementById('amount');
+    const dateInput = document.getElementById('transaction-date');
     
     let currentUser = null;
     let currentBalances = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
 
-    // --- KÜÇÜK BUTONLAR (STEPPER) YÖNETİMİ ---
-    const amountInput = document.getElementById('amount');
-    
+    // Tarih alanını bugünün tarihi ile başlatma fonksiyonu
+    function setDefaultDate() {
+        dateInput.value = new Date().toISOString().split('T')[0];
+    }
+
+    // --- STEPPER (-) VE (+) BUTONLARI ---
     document.getElementById('btn-minus').addEventListener('click', () => {
         let val = parseFloat(amountInput.value) || 0;
         if (val > 0) {
@@ -404,7 +410,7 @@
         amountInput.value = (val + 1).toFixed(2);
     });
 
-    // --- KUR YÖNETİMİ ---
+    // --- KUR LOGIC ---
     const savedRates = JSON.parse(localStorage.getItem('tipRates')) || { USD: 32.50, EUR: 35.20, GBP: 41.10 };
     
     const rateUsdInput = document.getElementById('rate-usd');
@@ -435,12 +441,13 @@
         input.addEventListener('input', saveRatesAndCalculate);
     });
 
-    // --- AUTH VE VERİ AKIŞI ---
+    // --- AUTH TAKİBİ ---
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
             authSection.style.display = 'none';
             appSection.style.display = 'block';
+            setDefaultDate();
             loadData();
         } else {
             currentUser = null;
@@ -466,27 +473,32 @@
 
     document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
 
+    // --- İŞLEM KAYDETME ---
     document.getElementById('transaction-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const amount = parseFloat(amountInput.value);
         const currency = document.getElementById('currency').value;
         const type = document.getElementById('type').value;
+        const selectedDate = dateInput.value; // Örn: "2026-05-15"
 
-        if(!amount || !currentUser) return;
+        if(!amount || !currentUser || !selectedDate) return;
 
+        // Tarih sıralamasını bozmamak için girilen günü ISO String biçiminde kaydediyoruz
         await addDoc(collection(db, "users", currentUser.uid, "transactions"), {
             amount: amount,
             currency: currency,
             type: type,
-            timestamp: serverTimestamp(),
-            date: new Date().toISOString()
+            date: selectedDate
         });
         
         amountInput.value = '';
+        setDefaultDate();
     });
 
+    // --- REALTIME VERİ AKIŞI ---
     function loadData() {
-        const q = query(collection(db, "users", currentUser.uid, "transactions"), orderBy("timestamp", "desc"));
+        // İşlemleri girilen seçili tarihe ('date') göre tersten sıralıyoruz
+        const q = query(collection(db, "users", currentUser.uid, "transactions"), orderBy("date", "desc"));
         
         onSnapshot(q, (snapshot) => {
             currentBalances = { TL: 0, USD: 0, EUR: 0, GBP: 0 };
@@ -498,22 +510,27 @@
             
             const now = new Date();
             const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+            
+            // Haftanın ilk gününü (Pazartesi) bulma
             const firstDayOfWeek = new Date(now.setDate(now.getDate() - now.getDay() + (now.getDay() === 0 ? -6 : 1))); 
             firstDayOfWeek.setHours(0,0,0,0);
 
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                if(!data.timestamp) return;
+                if(!data.date) return;
 
                 const val = data.type === 'income' ? data.amount : -data.amount;
                 currentBalances[data.currency] += val;
 
-                const docDate = data.timestamp.toDate();
+                // İşlemin girilen tarihini Date objesine çeviriyoruz
+                const docDate = new Date(data.date + 'T12:00:00'); // Saat dilimi sapmalarını önlemek için öğlen 12'ye kuruyoruz
+
                 if(data.type === 'income') {
                     if(docDate >= firstDayOfMonth) monthlyTotals[data.currency] += data.amount;
                     if(docDate >= firstDayOfWeek) weeklyTotals[data.currency] += data.amount;
                 }
 
+                // UI Liste Elementi Oluşturma
                 const li = document.createElement('div');
                 li.className = 'list-group-item';
                 
@@ -522,7 +539,8 @@
                 const bgClass = isIncome ? 'icon-income' : 'icon-expense';
                 const amountSign = isIncome ? '+' : '-';
                 
-                const dateStr = docDate.toLocaleDateString('tr-TR', {day: 'numeric', month: 'short'}) + ' ' + docDate.toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
+                // Tarihi ekranda güzel gösterme (Örn: 15 May)
+                const formattedDate = docDate.toLocaleDateString('tr-TR', {day: 'numeric', month: 'short'});
                 
                 li.innerHTML = `
                     <div class="icon-circle ${bgClass}">
@@ -530,7 +548,7 @@
                     </div>
                     <div class="flex-grow-1">
                         <div class="fw-bold text-dark" style="font-size:0.95rem;">${isIncome ? 'Bahşiş Geldi' : 'Para Çıkışı'}</div>
-                        <div class="small text-muted" style="font-size:0.75rem;">${dateStr}</div>
+                        <div class="small text-muted" style="font-size:0.75rem;">${formattedDate}</div>
                     </div>
                     <div class="fw-bold" style="font-size: 1.05rem; color: ${isIncome ? 'var(--success)' : 'var(--danger)'};">
                         ${amountSign}${data.amount} ${data.currency}
@@ -539,16 +557,19 @@
                 listEl.appendChild(li);
             });
 
+            // Alt Kutu Değerlerini Güncelle
             document.getElementById('total-tl').innerText = currentBalances.TL.toFixed(2);
             document.getElementById('total-usd').innerText = currentBalances.USD.toFixed(2);
             document.getElementById('total-eur').innerText = currentBalances.EUR.toFixed(2);
             document.getElementById('total-gbp').innerText = currentBalances.GBP.toFixed(2);
 
+            // İstatistikleri Güncelle
             document.getElementById('monthly-stats').innerHTML = 
                 `₺ ${monthlyTotals.TL.toFixed(2)} &nbsp;|&nbsp; $ ${monthlyTotals.USD.toFixed(2)} <br> € ${monthlyTotals.EUR.toFixed(2)} &nbsp;|&nbsp; £ ${monthlyTotals.GBP.toFixed(2)}`;
             document.getElementById('weekly-stats').innerHTML = 
                 `₺ ${weeklyTotals.TL.toFixed(2)} &nbsp;|&nbsp; $ ${weeklyTotals.USD.toFixed(2)} <br> € ${weeklyTotals.EUR.toFixed(2)} &nbsp;|&nbsp; £ ${weeklyTotals.GBP.toFixed(2)}`;
 
+            // Genel TL Toplamını Hesapla
             saveRatesAndCalculate();
         });
     }
